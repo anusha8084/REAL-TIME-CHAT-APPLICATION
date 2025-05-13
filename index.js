@@ -1,15 +1,15 @@
 const WebSocket = require('ws');
-const PORT = 3001;
-const wss = new WebSocket.Server({ port: PORT });
+const wss = new WebSocket.Server({ port: 5000 });
 
 let clients = [];
 
 wss.on('connection', (ws) => {
   clients.push(ws);
+  console.log('Client connected');
 
   ws.on('message', (message) => {
-    // Broadcast message to all clients
-    clients.forEach(client => {
+    // Broadcast to all clients
+    clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(message);
       }
@@ -18,7 +18,8 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     clients = clients.filter(client => client !== ws);
+    console.log('Client disconnected');
   });
 });
 
-console.log(`WebSocket server running on ws://localhost:${PORT}`);
+console.log('WebSocket server is running on ws://localhost:5000');
