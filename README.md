@@ -98,3 +98,4 @@ This project serves as a learning milestone for integrating real-time data trans
 
 
 *OUTPUT*:
+![Image](https://github.com/user-attachments/assets/7ad8d7b8-e8c4-4add-b2cd-0ef1041b6307)
