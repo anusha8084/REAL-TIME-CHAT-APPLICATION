@@ -1,25 +1,17 @@
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 5000 });
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-let clients = [];
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-wss.on('connection', (ws) => {
-  clients.push(ws);
-  console.log('Client connected');
-
-  ws.on('message', (message) => {
-    // Broadcast to all clients
-    clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  ws.on('close', () => {
-    clients = clients.filter(client => client !== ws);
-    console.log('Client disconnected');
-  });
-});
-
-console.log('WebSocket server is running on ws://localhost:5000');
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
